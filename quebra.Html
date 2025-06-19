@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasileirinho - Quebra-cabeça</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background-color: #e8f5e8;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+    
+    .botao {
+      display: inline-block;
+      background-color: #81c784;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 25px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .botao:hover {
+      background-color: #66bb6a;
+    }
+    
+    .puzzle-container {
+      display: grid;
+      grid-template-columns: repeat(3, 120px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin: 30px auto;
+      max-width: 400px;
+    }
+    
+    .puzzle-piece {
+      width: 120px;
+      height: 120px;
+      background-color: #fff;
+      border: 3px solid #4caf50;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      user-select: none;
+    }
+    
+    .puzzle-piece:hover {
+      transform: scale(1.05);
+    }
+    
+    .puzzle-piece.empty {
+      background-color: #c8e6c9;
+      border-style: dashed;
+    }
+    
+    .message {
+      font-size: 20px;
+      margin: 20px 0;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+    
+    .win-message {
+      color: #ff6f00;
+      font-size: 24px;
+      animation: bounce 0.5s infinite alternate;
+    }
+    
+    @keyframes bounce {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 Quebra-cabeça dos Animais do Brasil</h1>
+  
+  <div class="message" id="message">Clique nas peças para montar o quebra-cabeça!</div>
+  
+  <div class="puzzle-container" id="puzzleContainer">
+    <!-- Peças serão geradas pelo JavaScript -->
+  </div>
+  
+  <button class="botao" onclick="embaralhar()">🔄 Embaralhar</button>
+  <a href="Jogos.html" class="botao">← Voltar aos Jogos</a>
+  
+  <script>
+    // Peças do quebra-cabeça (animais do Brasil)
+    const pecas = ['🦜', '🐆', '🦌', '🐒', '🦎', '🐍', '🦋', '🐸', ''];
+    let tabuleiro = [...pecas];
+    let movimentos = 0;
+    
+    function criarTabuleiro() {
+      const container = document.getElementById('puzzleContainer');
+      container.innerHTML = '';
+      
+      tabuleiro.forEach((peca, index) => {
+        const div = document.createElement('div');
+        div.className = 'puzzle-piece';
+        div.textContent = peca;
+        div.onclick = () => moverPeca(index);
+        
+        if (peca === '') {
+          div.classList.add('empty');
+        }
+        
+        container.appendChild(div);
+      });
+    }
+    
+    function moverPeca(index) {
+      const posicaoVazia = tabuleiro.indexOf('');
+      const linha = Math.floor(index / 3);
+      const coluna = index % 3;
+      const linhaVazia = Math.floor(posicaoVazia / 3);
+      const colunaVazia = posicaoVazia % 3;
+      
+      // Verifica se a peça está adjacente ao espaço vazio
+      const adjacente = 
+        (Math.abs(linha - linhaVazia) === 1 && coluna === colunaVazia) ||
+        (Math.abs(coluna - colunaVazia) === 1 && linha === linhaVazia);
+      
+      if (adjacente) {
+        // Troca as peças
+        [tabuleiro[index], tabuleiro[posicaoVazia]] = [tabuleiro[posicaoVazia], tabuleiro[index]];
+        movimentos++;
+        criarTabuleiro();
+        verificarVitoria();
+      }
+    }
+    
+    function verificarVitoria() {
+      const solucao = ['🦜', '🐆', '🦌', '🐒', '🦎', '🐍', '🦋', '🐸', ''];
+      const venceu = tabuleiro.every((peca, index) => peca === solucao[index]);
+      
+      const messageEl = document.getElementById('message');
+      if (venceu) {
+        messageEl.innerHTML = `🎉 Parabéns! Você completou em ${movimentos} movimentos! 🎉`;
+        messageEl.className = 'message win-message';
+      } else {
+        messageEl.innerHTML = `Movimentos: ${movimentos} - Continue tentando!`;
+        messageEl.className = 'message';
+      }
+    }
+    
+    function embaralhar() {
+      // Embaralha as peças (exceto a última que é sempre vazia)
+      const pecasParaEmbaralhar = pecas.slice(0, -1);
+      for (let i = pecasParaEmbaralhar.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pecasParaEmbaralhar[i], pecasParaEmbaralhar[j]] = [pecasParaEmbaralhar[j], pecasParaEmbaralhar[i]];
+      }
+      
+      tabuleiro = [...pecasParaEmbaralhar, ''];
+      movimentos = 0;
+      criarTabuleiro();
+      
+      const messageEl = document.getElementById('message');
+      messageEl.innerHTML = 'Quebra-cabeça embaralhado! Boa sorte!';
+      messageEl.className = 'message';
+    }
+    
+    // Inicializa o jogo
+    embaralhar();
+  </script>
+</body>
+</html>

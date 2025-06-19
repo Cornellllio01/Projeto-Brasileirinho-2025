@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🖍️ Pintar</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(to right, #ffe0b2, #fff3e0);
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #e65100;
+      margin-bottom: 20px;
+    }
+
+    .grade {
+      display: grid;
+      grid-template-columns: repeat(10, 30px);
+      gap: 5px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .celula {
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .paleta {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .cor {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #555;
+      cursor: pointer;
+    }
+
+    .botao {
+      background-color: #ffcc80;
+      color: #000;
+      padding: 15px 25px;
+      margin-top: 10px;
+      border-radius: 20px;
+      font-size: 18px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .botao:hover {
+      background-color: #ffe0b2;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🖍️ Vamos Pintar!</h1>
+
+  <div class="paleta">
+    <div class="cor" style="background-color: red;" onclick="selecionarCor('red')"></div>
+    <div class="cor" style="background-color: blue;" onclick="selecionarCor('blue')"></div>
+    <div class="cor" style="background-color: green;" onclick="selecionarCor('green')"></div>
+    <div class="cor" style="background-color: yellow;" onclick="selecionarCor('yellow')"></div>
+    <div class="cor" style="background-color: pink;" onclick="selecionarCor('pink')"></div>
+    <div class="cor" style="background-color: orange;" onclick="selecionarCor('orange')"></div>
+    <div class="cor" style="background-color: black;" onclick="selecionarCor('black')"></div>
+  </div>
+
+  <div class="grade" id="grade"></div>
+
+  <a href="index.html" class="botao">🏠 Voltar ao Início</a>
+
+  <script>
+    let corSelecionada = "black";
+
+    function selecionarCor(cor) {
+      corSelecionada = cor;
+    }
+
+    const grade = document.getElementById("grade");
+
+    for (let i = 0; i < 100; i++) {
+      const celula = document.createElement("div");
+      celula.classList.add("celula");
+      celula.addEventListener("click", () => {
+        celula.style.backgroundColor = corSelecionada;
+      });
+      grade.appendChild(celula);
+    }
+  </script>
+
+</body>
+</html>

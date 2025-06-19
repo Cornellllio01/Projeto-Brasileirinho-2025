@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasileirinho - Ache o Bicho</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(135deg, #81c784, #a5d6a7);
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      min-height: 100vh;
+    }
+    
+    h1 {
+      color: #1b5e20;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .game-info {
+      background-color: rgba(255,255,255,0.9);
+      padding: 15px;
+      border-radius: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .animal-to-find {
+      font-size: 80px;
+      margin: 20px 0;
+      animation: bounce 1s infinite alternate;
+    }
+    
+    .instruction {
+      font-size: 22px;
+      color: #2e7d32;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    .score {
+      font-size: 18px;
+      color: #1565c0;
+      margin: 10px 0;
+    }
+    
+    .game-area {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    
+    .animal-card {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border: 3px solid #4caf50;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .animal-card:hover {
+      transform: scale(1.1);
+      border-color: #ff9800;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    
+    .animal-card.correct {
+      background-color: #c8e6c9;
+      border-color: #4caf50;
+      animation: correctFlash 0.5s;
+    }
+    
+    .animal-card.wrong {
+      background-color: #ffcdd2;
+      border-color: #f44336;
+      animation: wrongShake 0.5s;
+    }
+    
+    .botao {
+      display: inline-block;
+      background-color: #ffab40;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 25px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .botao:hover {
+      background-color: #ff9800;
+      transform: translateY(-2px);
+    }
+    
+    .message {
+      font-size: 24px;
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 15px;
+      font-weight: bold;
+    }
+    
+    .success-message {
+      background-color: #c8e6c9;
+      color: #2e7d32;
+      border: 2px solid #4caf50;
+    }
+    
+    .game-over {
+      background-color: #ffe0b2;
+      color: #e65100;
+      border: 2px solid #ff9800;
+    }
+    
+    @keyframes bounce {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-10px); }
+    }
+    
+    @keyframes correctFlash {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); background-color: #4caf50; }
+    }
+    
+    @keyframes wrongShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    
+    .level-indicator {
+      background-color: rgba(255,255,255,0.8);
+      padding: 10px;
+      border-radius: 15px;
+      margin: 10px;
+      display: inline-block;
+      font-weight: bold;
+      color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Ache o Bicho do Brasil</h1>
+  
+  <div class="game-info">
+    <div class="level-indicator" id="levelIndicator">Nível: 1</div>
+    <div class="score" id="scoreDisplay">Pontos: 0 | Tempo: <span id="timer">30</span>s</div>
+    <div class="instruction">Encontre este animal:</div>
+    <div class="animal-to-find" id="targetAnimal">🦜</div>
+  </div>
+  
+  <div class="game-area" id="gameArea">
+    <!-- Animais serão gerados pelo JavaScript -->
+  </div>
+  
+  <div id="messageArea"></div>
+  
+  <div>
+    <button class="botao" onclick="novoJogo()">🔄 Novo Jogo</button>
+    <a href="Jogos.html" class="botao">← Voltar aos Jogos</a>
+  </div>
+  
+  <script>
+    // Animais do Brasil
+    const animais = ['🦜', '🐆', '🦌', '🐒', '🦎', '🐍', '🦋', '🐸', '🐊', '🦘', '🐧', '🦆', '🐢', '🦈', '🐠', '🦀'];
+    
+    let pontos = 0;
+    let nivel = 1;
+    let tempoRestante = 30;
+    let animalAlvo = '';
+    let jogoAtivo = false;
+    let timerInterval;
+    
+    function iniciarJogo() {
+      pontos = 0;
+      nivel = 1;
+      tempoRestante = 30;
+      jogoAtivo = true;
+      document.getElementById('messageArea').innerHTML = '';
+      atualizarInterface();
+      proximaRodada();
+      iniciarTimer();
+    }
+    
+    function proximaRodada() {
+      if (!jogoAtivo) return;
+      
+      // Escolhe animal alvo aleatório
+      animalAlvo = animais[Math.floor(Math.random() * animais.length)];
+      document.getElementById('targetAnimal').textContent = animalAlvo;
+      
+      // Cria grade de animais
+      criarGradeAnimais();
+      
+      // Atualiza nível (aumenta a cada 5 pontos)
+      nivel = Math.floor(pontos / 5) + 1;
+      atualizarInterface();
+    }
+    
+    function criarGradeAnimais() {
+      const gameArea = document.getElementById('gameArea');
+      gameArea.innerHTML = '';
+      
+      // Número de animais baseado no nível (mais difícil = mais opções)
+      const numAnimais = Math.min(12 + (nivel * 2), 16);
+      
+      // Cria array com animais aleatórios + o animal alvo
+      let animaisParaExibir = [animalAlvo];
+      
+      while (animaisParaExibir.length < numAnimais) {
+        const animalAleatorio = animais[Math.floor(Math.random() * animais.length)];
+        if (!animaisParaExibir.includes(animalAleatorio)) {
+          animaisParaExibir.push(animalAleatorio);
+        }
+      }
+      
+      // Embaralha a posição dos animais
+      animaisParaExibir = animaisParaExibir.sort(() => Math.random() - 0.5);
+      
+      // Cria os cards dos animais
+      animaisParaExibir.forEach(animal => {
+        const card = document.createElement('div');
+        card.className = 'animal-card';
+        card.textContent = animal;
+        card.onclick = () => verificarEscolha(animal, card);
+        gameArea.appendChild(card);
+      });
+    }
+    
+    function verificarEscolha(animalEscolhido, card) {
+      if (!jogoAtivo) return;
+      
+      if (animalEscolhido === animalAlvo) {
+        // Resposta correta
+        card.classList.add('correct');
+        pontos += 10;
+        mostrarMensagem('🎉 Muito bem! +10 pontos!', 'success-message');
+        
+        setTimeout(() => {
+          proximaRodada();
+        }, 1000);
+        
+      } else {
+        // Resposta errada
+        card.classList.add('wrong');
+        pontos = Math.max(0, pontos - 2);
+        mostrarMensagem('❌ Ops! Tente novamente! -2 pontos', 'wrong-message');
+        
+        setTimeout(() => {
+          card.classList.remove('wrong');
+        }, 500);
+      }
+      
+      atualizarInterface();
+    }
+    
+    function iniciarTimer() {
+      timerInterval = setInterval(() => {
+        if (!jogoAtivo) return;
+        
+        tempoRestante--;
+        document.getElementById('timer').textContent = tempoRestante;
+        
+        if (tempoRestante <= 0) {
+          fimDeJogo();
+        }
+      }, 1000);
+    }
+    
+    function fimDeJogo() {
+      jogoAtivo = false;
+      clearInterval(timerInterval);
+      
+      let mensagemFinal = '';
+      if (pontos >= 100) {
+        mensagemFinal = `🏆 INCRÍVEL! ${pontos} pontos! Você é um expert em animais do Brasil!`;
+      } else if (pontos >= 50) {
+        mensagemFinal = `🌟 Muito bom! ${pontos} pontos! Continue praticando!`;
+      } else {
+        mensagemFinal = `🌱 Que tal tentar mais uma vez? Você fez ${pontos} pontos!`;
+      }
+      
+      mostrarMensagem(mensagemFinal, 'game-over');
+    }
+    
+    function mostrarMensagem(texto, classe) {
+      const messageArea = document.getElementById('messageArea');
+      messageArea.innerHTML = `<div class="message ${classe}">${texto}</div>`;
+      
+      if (classe !== 'game-over') {
+        setTimeout(() => {
+          messageArea.innerHTML = '';
+        }, 2000);
+      }
+    }
+    
+    function atualizarInterface() {
+      document.getElementById('scoreDisplay').innerHTML = 
+        `Pontos: ${pontos} | Tempo: <span id="timer">${tempoRestante}</span>s`;
+      document.getElementById('levelIndicator').textContent = `Nível: ${nivel}`;
+    }
+    
+    function novoJogo() {
+      clearInterval(timerInterval);
+      iniciarJogo();
+    }
+    
+    // Inicia o jogo quando a página carrega
+    window.onload = () => {
+      iniciarJogo();
+    };
+  </script>
+</body>
+</html>
