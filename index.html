@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Brasileirinho 🌿</title>
 
   <style>
@@ -33,23 +33,24 @@
     .botao:hover {
       background-color: #ffe0b2;
     }
+    audio {
+      display: none; /* esconde o player */
+    }
   </style>
-
-  <!-- <link rel="stylesheet" href="styles/style.css"> -->
-
 </head>
 <body>
   <h1>🌈 Bem-vindo ao Brasileirinho!</h1>
 
-  <!-- Caminhos corrigidos com letras correspondentes -->
   <a href="Jogos.html" class="botao">🎲 Jogar</a>
   <a href="Historias.html" class="botao">📚 Histórias</a>
   <a href="Animais.html" class="botao">🦜 Animais do Brasil</a>
-  <a href="<audio id="musicaFundo" loop autoplay preload="auto">
-  
-<audio id="musicaFundo" loop autoplay preload="auto">
-  
-</audio>
-  
+  <a href="pintar.html" class="botao">🖍️ Pintar</a>
+
+  <!-- Player de áudio oculto com autoplay e loop -->
+  <audio id="musicaFundo" autoplay loop preload="auto">
+    <source src="audio/happy-kids-music-297744.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
 </body>
 </html>
