@@ -12,18 +12,26 @@
       padding: 20px;
       margin: 0;
     }
+
     h1 {
       color: #0277bd;
       margin-bottom: 20px;
     }
+
     .historia {
-      background-color: #fff;
+      background-color: #ffffff;
       padding: 20px;
       border-radius: 15px;
-      max-width: 600px;
-      margin: auto;
+      max-width: 700px;
+      margin: 20px auto;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      text-align: left;
     }
+
+    .historia h2 {
+      color: #01579b;
+    }
+
     .botao {
       background-color: #81d4fa;
       padding: 12px 20px;
@@ -35,9 +43,11 @@
       display: inline-block;
       margin-bottom: 20px;
     }
+
     .botao:hover {
       background-color: #b3e5fc;
     }
+
     #botaoSom {
       position: fixed;
       bottom: 15px;
@@ -57,15 +67,37 @@
 
   <h1>📚 Histórias Brasileiras</h1>
 
-  <a href="index.html" class="botao">🏠 Voltar ao Início</a><br><br>
+  <a href="index.html" class="botao">🏠 Voltar ao Início</a>
 
   <div class="historia">
-    <h2>O Saci-Pererê</h2>
-    <p>Em uma floresta mágica do Brasil, vivia o Saci-Pererê, um travesso menino de uma perna só que adorava fazer brincadeiras com viajantes e animais...</p>
+    <h2>1. O Saci-Pererê</h2>
+    <p>Em uma floresta mágica do Brasil, vivia o Saci-Pererê, um menino de uma perna só que adorava fazer travessuras. Ele usava um gorro vermelho e desaparecia em redemoinhos de vento. Apesar das brincadeiras, o Saci tinha um bom coração.</p>
   </div>
 
+  <div class="historia">
+    <h2>2. A Iara</h2>
+    <p>A Iara era uma sereia encantadora que vivia nos rios da Amazônia. Com sua voz suave, atraía pescadores desavisados para o fundo das águas. Mas conta a lenda que ela apenas queria companhia para sua solidão.</p>
+  </div>
+
+  <div class="historia">
+    <h2>3. O Curupira</h2>
+    <p>Guardião das florestas, o Curupira era um ser de cabelos vermelhos e pés virados para trás. Ele enganava caçadores que machucavam os animais ou desmatavam a mata, deixando pegadas confusas para despistar os malfeitores.</p>
+  </div>
+
+  <div class="historia">
+    <h2>4. A Mula sem Cabeça</h2>
+    <p>À meia-noite, uma mula em chamas sem cabeça corria pelos campos, soltando fogo pelas narinas. Dizem que é uma mulher que foi amaldiçoada por amar um padre. A lenda ensina o respeito às escolhas e tradições.</p>
+  </div>
+
+  <div class="historia">
+    <h2>5. O Boto Cor-de-Rosa</h2>
+    <p>Nas festas ribeirinhas, o Boto se transforma em um belo rapaz para encantar moças. Depois desaparece nas águas do rio. Ele é símbolo da magia e do mistério dos rios da Amazônia.</p>
+  </div>
+
+  <!-- Botão de som -->
   <button id="botaoSom">🔊 Tocar Música</button>
 
+  <!-- Áudio -->
   <audio id="musicaFundo" loop preload="auto">
     <source src="happy-kids-music-297744.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
