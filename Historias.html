@@ -3,114 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📚 Histórias do Brasileirinho</title>
+  <title>📚 Histórias</title>
   <style>
     body {
       font-family: "Comic Sans MS", cursive;
-      background: linear-gradient(to right, #f8bbd0, #fce4ec);
-      padding: 20px;
+      background-color: #e1f5fe;
       text-align: center;
+      padding: 20px;
+      margin: 0;
     }
-
     h1 {
-      color: #d81b60;
+      color: #0277bd;
       margin-bottom: 20px;
     }
-
+    .historia {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
     .botao {
-      background-color: #ffcc80;
-      padding: 15px 25px;
-      margin: 10px auto;
-      display: block;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 20px;
-      font-size: 22px;
+      background-color: #81d4fa;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 18px;
       color: #000;
       text-decoration: none;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-      transition: background 0.3s;
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+      display: inline-block;
+      margin-bottom: 20px;
     }
-
     .botao:hover {
-      background-color: #ffe0b2;
+      background-color: #b3e5fc;
     }
-
-    .historia {
-      background-color: #fff8e1;
-      padding: 20px;
-      border-radius: 20px;
-      margin-top: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      display: none;
-      text-align: left;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .historia p {
-      font-size: 20px;
-      margin: 10px 0;
-    }
-
-    .voltar {
-      margin-top: 20px;
+    #botaoSom {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      padding: 6px 12px;
+      background-color: #90caf9;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
 
-  <h1>📖 Escolha uma História</h1>
+  <h1>📚 Histórias Brasileiras</h1>
 
-  <!-- Botão para voltar ao menu principal -->
-  <a href="index.html" class="botao">🏠 Voltar ao Início</a>
+  <a href="index.html" class="botao">🏠 Voltar ao Início</a><br><br>
 
-  <!-- Lista de histórias -->
-  <div id="listaHistorias">
-    <a href="#" class="botao" onclick="mostrarHistoria('curupira')">🌳 A Lenda do Curupira</a>
-    <a href="#" class="botao" onclick="mostrarHistoria('historia2')">🧜‍♀️ A Lenda da Iara</a>
-    <a href="#" class="botao" onclick="mostrarHistoria('historia3')">🧙‍♂️ O Saci-Pererê</a>
+  <div class="historia">
+    <h2>O Saci-Pererê</h2>
+    <p>Em uma floresta mágica do Brasil, vivia o Saci-Pererê, um travesso menino de uma perna só que adorava fazer brincadeiras com viajantes e animais...</p>
   </div>
 
-  <div id="curupira" class="historia">
-    <h2>🌳 A Lenda do Curupira</h2>
-    <p>O Curupira é uma criatura do folclore brasileiro que protege as florestas. Ele tem os cabelos vermelhos como o fogo e os pés virados para trás! 👣🔥</p>
-    <p>Com seus passos invertidos, ele confunde caçadores e madeireiros que tentam destruir a natureza. 🌿</p>
-    <p>Quem ouve seus assobios na floresta deve fugir, pois o Curupira protege os animais e as árvores com coragem e magia! 🦜🌲✨</p>
-    <a href="#" class="botao voltar" onclick="voltar()">⬅️ Voltar</a>
-  </div>
+  <button id="botaoSom">🔊 Tocar Música</button>
 
-  <div id="historia2" class="historia">
-    <h2>🧜‍♀️ A Lenda da Iara</h2>
-    <p>A Iara é uma sereia encantadora dos rios da Amazônia. Ela canta para atrair os pescadores e os leva para o fundo do rio. 🌊🎶</p>
-    <p>Com cabelos longos e olhos brilhantes, a Iara é bela, mas também misteriosa e poderosa. Cuidado ao ouvir seu canto! 🐟✨</p>
-    <a href="#" class="botao voltar" onclick="voltar()">⬅️ Voltar</a>
-  </div>
-
-  <div id="historia3" class="historia">
-    <h2>🧙‍♂️ O Saci-Pererê</h2>
-    <p>O Saci-Pererê é um personagem travesso do folclore brasileiro, conhecido por usar um gorro vermelho e fumar seu cachimbo. 🎩💨</p>
-    <p>Ele adora pregar peças nas pessoas, fazendo barulhos e sumindo rapidamente. Apesar disso, é também um guardião da natureza. 🌪️🍃</p>
-    <p>Dizem que quem conseguir pegar o gorro do Saci pode fazer pedidos e controlar seus poderes! ✨🧙‍♂️</p>
-    <a href="#" class="botao voltar" onclick="voltar()">⬅️ Voltar</a>
-  </div>
+  <audio id="musicaFundo" loop preload="auto">
+    <source src="happy-kids-music-297744.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
   <script>
-    function mostrarHistoria(id) {
-      // Esconde lista de histórias e todas as histórias abertas
-      document.getElementById('listaHistorias').style.display = 'none';
-      document.querySelectorAll('.historia').forEach(el => el.style.display = 'none');
-      // Mostra a história escolhida
-      document.getElementById(id).style.display = 'block';
-    }
+    const audio = document.getElementById('musicaFundo');
+    const botao = document.getElementById('botaoSom');
+    let tocando = false;
 
-    function voltar() {
-      // Esconde todas as histórias
-      document.querySelectorAll('.historia').forEach(el => el.style.display = 'none');
-      // Mostra a lista de histórias
-      document.getElementById('listaHistorias').style.display = 'block';
-    }
+    botao.addEventListener('click', () => {
+      if (tocando) {
+        audio.pause();
+        botao.textContent = '🔊 Tocar Música';
+      } else {
+        audio.play();
+        botao.textContent = '🔈 Pausar Música';
+      }
+      tocando = !tocando;
+    });
   </script>
 
 </body>
