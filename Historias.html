@@ -7,45 +7,118 @@
   <style>
     body {
       font-family: "Comic Sans MS", cursive;
-      background-color: #e1f5fe;
-      text-align: center;
+      background: linear-gradient(to right, #e3f2fd, #bbdefb);
       padding: 20px;
+      text-align: center;
       margin: 0;
     }
 
     h1 {
-      color: #0277bd;
+      color: #1565c0;
       margin-bottom: 20px;
     }
 
-    .historia {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 700px;
-      margin: 20px auto;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    ul.historia-lista {
+      list-style: none;
+      padding: 0;
+      max-width: 500px;
+      margin: 0 auto 30px auto;
       text-align: left;
     }
 
-    .historia h2 {
-      color: #01579b;
+    ul.historia-lista li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      font-size: 22px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: background 0.3s;
+      user-select: none;
+    }
+
+    ul.historia-lista li:hover {
+      background: #bbdefb;
+      color: #0d47a1;
+    }
+
+    .emoji {
+      font-size: 36px;
+      flex-shrink: 0;
     }
 
     .botao {
-      background-color: #81d4fa;
+      background-color: #64b5f6;
       padding: 12px 20px;
       border-radius: 25px;
       font-size: 18px;
       color: #000;
       text-decoration: none;
-      box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
       display: inline-block;
-      margin-bottom: 20px;
+      margin-top: 20px;
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
     }
 
     .botao:hover {
-      background-color: #b3e5fc;
+      background-color: #42a5f5;
+      color: white;
+    }
+
+    /* Modal */
+    #modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      padding: 20px;
+    }
+
+    #modalContent {
+      background: #fff;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 100%;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      text-align: left;
+      position: relative;
+    }
+
+    #modalContent h2 {
+      margin-top: 0;
+      color: #1565c0;
+    }
+
+    #modalContent p {
+      font-size: 18px;
+      margin: 15px 0;
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #64b5f6;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+
+    #closeModal:hover {
+      background: #42a5f5;
     }
 
     #botaoSom {
@@ -65,34 +138,27 @@
 </head>
 <body>
 
-  <h1>📚 Histórias Brasileiras</h1>
+  <h1>📚 Histórias do Brasil</h1>
+
+  <ul class="historia-lista">
+    <li onclick="abrirModal('Saci-Pererê', 'Um menino de uma perna só, travesso e inteligente, que desaparece em redemoinhos e protege a floresta.')">
+      <span class="emoji">🧢</span> Saci-Pererê
+    </li>
+    <li onclick="abrirModal('Iara', 'Uma sereia encantadora que vive nos rios da Amazônia e encanta com sua voz suave.')">
+      <span class="emoji">🧜‍♀️</span> Iara
+    </li>
+    <li onclick="abrirModal('Curupira', 'Guardião da floresta com cabelos vermelhos e pés para trás, protege os animais e engana os caçadores.')">
+      <span class="emoji">🌳</span> Curupira
+    </li>
+    <li onclick="abrirModal('Mula sem Cabeça', 'Aparece nas noites, soltando fogo pelas narinas e cavalgando sem cabeça.')">
+      <span class="emoji">🔥</span> Mula sem Cabeça
+    </li>
+    <li onclick="abrirModal('Boto Cor-de-Rosa', 'Se transforma em um homem bonito nas festas e volta ao rio antes do amanhecer.')">
+      <span class="emoji">🐬</span> Boto Cor-de-Rosa
+    </li>
+  </ul>
 
   <a href="index.html" class="botao">🏠 Voltar ao Início</a>
-
-  <div class="historia">
-    <h2>1. O Saci-Pererê</h2>
-    <p>Em uma floresta mágica do Brasil, vivia o Saci-Pererê, um menino de uma perna só que adorava fazer travessuras. Ele usava um gorro vermelho e desaparecia em redemoinhos de vento. Apesar das brincadeiras, o Saci tinha um bom coração.</p>
-  </div>
-
-  <div class="historia">
-    <h2>2. A Iara</h2>
-    <p>A Iara era uma sereia encantadora que vivia nos rios da Amazônia. Com sua voz suave, atraía pescadores desavisados para o fundo das águas. Mas conta a lenda que ela apenas queria companhia para sua solidão.</p>
-  </div>
-
-  <div class="historia">
-    <h2>3. O Curupira</h2>
-    <p>Guardião das florestas, o Curupira era um ser de cabelos vermelhos e pés virados para trás. Ele enganava caçadores que machucavam os animais ou desmatavam a mata, deixando pegadas confusas para despistar os malfeitores.</p>
-  </div>
-
-  <div class="historia">
-    <h2>4. A Mula sem Cabeça</h2>
-    <p>À meia-noite, uma mula em chamas sem cabeça corria pelos campos, soltando fogo pelas narinas. Dizem que é uma mulher que foi amaldiçoada por amar um padre. A lenda ensina o respeito às escolhas e tradições.</p>
-  </div>
-
-  <div class="historia">
-    <h2>5. O Boto Cor-de-Rosa</h2>
-    <p>Nas festas ribeirinhas, o Boto se transforma em um belo rapaz para encantar moças. Depois desaparece nas águas do rio. Ele é símbolo da magia e do mistério dos rios da Amazônia.</p>
-  </div>
 
   <!-- Botão de som -->
   <button id="botaoSom">🔊 Tocar Música</button>
@@ -103,7 +169,28 @@
     Seu navegador não suporta áudio.
   </audio>
 
+  <!-- Modal -->
+  <div id="modal" onclick="fecharModal(event)">
+    <div id="modalContent">
+      <button id="closeModal" onclick="fecharModal(event)">×</button>
+      <h2 id="modalTitulo"></h2>
+      <p id="modalTexto"></p>
+    </div>
+  </div>
+
   <script>
+    function abrirModal(titulo, texto) {
+      document.getElementById('modalTitulo').textContent = titulo;
+      document.getElementById('modalTexto').textContent = texto;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function fecharModal(event) {
+      if (event.target.id === 'modal' || event.target.id === 'closeModal') {
+        document.getElementById('modal').style.display = 'none';
+      }
+    }
+
     const audio = document.getElementById('musicaFundo');
     const botao = document.getElementById('botaoSom');
     let tocando = false;
@@ -117,6 +204,12 @@
         botao.textContent = '🔈 Pausar Música';
       }
       tocando = !tocando;
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        fecharModal(event);
+      }
     });
   </script>
 
