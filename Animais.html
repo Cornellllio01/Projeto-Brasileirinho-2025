@@ -62,7 +62,6 @@
       color: #fff;
     }
 
-    /* Modal */
     #modal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -112,21 +111,6 @@
     #closeModal:hover {
       background: #66bb6a;
     }
-
-    /* Botão de som fixo */
-    #botaoSom {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background-color: #90caf9;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-    }
   </style>
 </head>
 <body>
@@ -134,8 +118,54 @@
   <h1>🦜 Animais do Brasil</h1>
 
   <ul class="animais-lista">
-    <!-- ... sua lista continua aqui (sem alterações) ... -->
-    <!-- Lista dos animais omitida por brevidade -->
+    <li onclick="abrirModal('Arara', 'A arara é uma ave tropical conhecida por suas cores vibrantes e inteligência.')">
+      <span class="emoji">🦜</span> Arara
+    </li>
+    <li onclick="abrirModal('Onça-pintada', 'A onça-pintada é o maior felino das Américas.')">
+      <span class="emoji">🐆</span> Onça-pintada
+    </li>
+    <li onclick="abrirModal('Veado', 'O veado é um mamífero herbívoro encontrado em várias regiões do Brasil.')">
+      <span class="emoji">🦌</span> Veado
+    </li>
+    <li onclick="abrirModal('Macaco-prego', 'Primata inteligente conhecido pelo uso de ferramentas.')">
+      <span class="emoji">🐒</span> Macaco-prego
+    </li>
+    <li onclick="abrirModal('Jacaré', 'Vive em rios e pântanos, possui mandíbula poderosa.')">
+      <span class="emoji">🦎</span> Jacaré
+    </li>
+    <li onclick="abrirModal('Cobra', 'Controla populações de roedores, importante nos ecossistemas.')">
+      <span class="emoji">🐍</span> Cobra
+    </li>
+    <li onclick="abrirModal('Borboleta', 'Coloridas e importantes para polinização.')">
+      <span class="emoji">🦋</span> Borboleta
+    </li>
+    <li onclick="abrirModal('Sapo', 'Habitam florestas, áreas urbanas e possuem diversidade.')">
+      <span class="emoji">🐸</span> Sapo
+    </li>
+    <li onclick="abrirModal('Jacaré-açu', 'Pode atingir até 5 metros, maior réptil da América do Sul.')">
+      <span class="emoji">🐊</span> Jacaré-açu
+    </li>
+    <li onclick="abrirModal('Ema', 'Ave veloz nativa do Brasil.')">
+      <span class="emoji">🦘</span> Ema (ave)
+    </li>
+    <li onclick="abrirModal('Pinguim', 'Vive no sul do Brasil e gosta de águas frias.')">
+      <span class="emoji">🐧</span> Pinguim
+    </li>
+    <li onclick="abrirModal('Marreco', 'Ave aquática comum em lagos e rios.')">
+      <span class="emoji">🦆</span> Marreco
+    </li>
+    <li onclick="abrirModal('Tartaruga', 'Vivem em ambientes aquáticos e têm papel ecológico.')">
+      <span class="emoji">🐢</span> Tartaruga
+    </li>
+    <li onclick="abrirModal('Tubarão', 'Predador fundamental no oceano.')">
+      <span class="emoji">🦈</span> Tubarão
+    </li>
+    <li onclick="abrirModal('Peixe-boi', 'Mamífero aquático encontrado na Amazônia.')">
+      <span class="emoji">🐠</span> Peixe-boi
+    </li>
+    <li onclick="abrirModal('Caranguejo', 'Vive em manguezais e ajuda a manter o ecossistema.')">
+      <span class="emoji">🦀</span> Caranguejo
+    </li>
   </ul>
 
   <a href="index.html" class="botao">🏠 Voltar ao Início</a>
@@ -147,15 +177,6 @@
       <p id="modalTexto"></p>
     </div>
   </div>
-
-  <!-- Botão de som fixo -->
-  <button id="botaoSom">🔊 Tocar Música</button>
-
-  <!-- Áudio escondido -->
-  <audio id="musicaFundo" loop preload="auto">
-    <source src="happy-kids-music-297744.mp3" type="audio/mpeg" />
-    Seu navegador não suporta áudio.
-  </audio>
 
   <script>
     function abrirModal(titulo, texto) {
@@ -174,22 +195,6 @@
       if (event.key === 'Escape') {
         document.getElementById('modal').style.display = 'none';
       }
-    });
-
-    // Controle do áudio
-    const audio = document.getElementById('musicaFundo');
-    const botao = document.getElementById('botaoSom');
-    let tocando = false;
-
-    botao.addEventListener('click', () => {
-      if (tocando) {
-        audio.pause();
-        botao.textContent = '🔊 Tocar Música';
-      } else {
-        audio.play();
-        botao.textContent = '🔈 Pausar Música';
-      }
-      tocando = !tocando;
     });
   </script>
 
