@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Brasileirinho com Música</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasileirinho 🌿</title>
   <style>
     body {
       font-family: Comic Sans MS, sans-serif;
       background-color: #fce4ec;
       text-align: center;
       padding: 20px;
+    }
+    h1 {
+      color: #00796b;
+      margin-bottom: 30px;
     }
     .botao {
       background-color: #ffcc80;
@@ -31,50 +35,43 @@
     #botaoSom {
       margin-top: 20px;
       padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
+      font-size: 18px;
+      border-radius: 10px;
       background-color: #b3e5fc;
       border: none;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      transition: background-color 0.3s;
-    }
-    #botaoSom:hover {
-      background-color: #90caf9;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <h1>🌈 Brasileirinho com Música!</h1>
+  <h1>🌈 Bem-vindo ao Brasileirinho!</h1>
 
-  <!-- Seus botões / links para navegar -->
   <a href="Jogos.html" class="botao">🎲 Jogar</a>
   <a href="Historias.html" class="botao">📚 Histórias</a>
   <a href="Animais.html" class="botao">🦜 Animais do Brasil</a>
   <a href="pintar.html" class="botao">🖍️ Pintar</a>
 
-  <!-- Botão para controlar som -->
   <button id="botaoSom">🔈 Ativar Som</button>
 
-  <!-- Áudio oculto que toca em loop -->
-  <audio id="musicaFundo" loop preload="auto" autoplay muted>
-    <source src="happy-kids-music-297744.mp3" type="audio/mpeg" />
+  <audio id="musicaFundo" loop autoplay muted>
+    <source src="happy-kids-music-297744.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
 
   <script>
-    const audio = document.getElementById('musicaFundo');
-    const botao = document.getElementById('botaoSom');
+    const audio = document.getElementById("musicaFundo");
+    const botao = document.getElementById("botaoSom");
 
-    botao.addEventListener('click', () => {
+    botao.addEventListener("click", () => {
       if (audio.muted) {
         audio.muted = false;
-        botao.textContent = '🔊 Pausar Música';
         audio.play();
+        botao.textContent = "🔊 Pausar Música";
       } else {
         audio.pause();
-        botao.textContent = '🔈 Ativar Som';
+        audio.muted = true;
+        botao.textContent = "🔈 Ativar Som";
       }
     });
   </script>
