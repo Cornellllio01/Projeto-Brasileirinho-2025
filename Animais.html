@@ -53,15 +53,17 @@
 
     .botao {
       background-color: #81c784;
-      padding: 15px 25px;
-      margin: 0 auto;
+      padding: 12px 20px;
+      margin: 10px auto;
       display: inline-block;
       border-radius: 25px;
-      font-size: 20px;
+      font-size: 18px;
       color: #000;
       text-decoration: none;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
       transition: background 0.3s;
+      border: none;
+      cursor: pointer;
     }
 
     .botao:hover {
@@ -124,21 +126,6 @@
     #closeModal:hover {
       background: #66bb6a;
     }
-
-    /* Botão de som */
-    #botaoSom {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  padding: 6px 12px;
-  background-color: #90caf9;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-}
   </style>
 </head>
 <body>
@@ -165,6 +152,12 @@
   </ul>
 
   <a href="index.html" class="botao">🏠 Voltar ao Início</a>
+  <button id="botaoSom" class="botao" style="font-size: 16px; padding: 8px 16px;">🔊 Tocar Música</button>
+
+  <audio id="musicaFundo" loop preload="auto">
+    <source src="happy-kids-music-297744.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
   <div id="modal" onclick="fecharModal(event)">
     <div id="modalContent">
@@ -173,15 +166,6 @@
       <p id="modalTexto"></p>
     </div>
   </div>
-
-  <!-- Botão de som -->
-  <button id="botaoSom">🔊 Tocar Música</button>
-
-  <!-- Áudio -->
-  <audio id="musicaFundo" loop preload="auto">
-    <source src="happy-kids-music-297744.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-  </audio>
 
   <script>
     function abrirModal(titulo, texto) {
@@ -202,7 +186,7 @@
       }
     });
 
-    // Controle do som
+    // Botão de som
     const audio = document.getElementById('musicaFundo');
     const botao = document.getElementById('botaoSom');
     let tocando = false;
