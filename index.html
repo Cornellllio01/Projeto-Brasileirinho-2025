@@ -11,6 +11,23 @@
       text-align: center;
       padding: 20px;
     }
+    .botao {
+      background-color: #ffcc80;
+      color: #000;
+      padding: 20px;
+      margin: 10px auto;
+      border-radius: 20px;
+      font-size: 24px;
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      text-decoration: none;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+    .botao:hover {
+      background-color: #ffe0b2;
+    }
     #botaoSom {
       margin-top: 20px;
       padding: 10px 20px;
@@ -19,18 +36,32 @@
       cursor: pointer;
       background-color: #b3e5fc;
       border: none;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+    #botaoSom:hover {
+      background-color: #90caf9;
     }
   </style>
 </head>
 <body>
+
   <h1>🌈 Brasileirinho com Música!</h1>
 
+  <!-- Seus botões / links para navegar -->
+  <a href="Jogos.html" class="botao">🎲 Jogar</a>
+  <a href="Historias.html" class="botao">📚 Histórias</a>
+  <a href="Animais.html" class="botao">🦜 Animais do Brasil</a>
+  <a href="pintar.html" class="botao">🖍️ Pintar</a>
+
+  <!-- Botão para controlar som -->
+  <button id="botaoSom">🔈 Ativar Som</button>
+
+  <!-- Áudio oculto que toca em loop -->
   <audio id="musicaFundo" loop preload="auto" autoplay muted>
     <source src="happy-kids-music-297744.mp3" type="audio/mpeg" />
     Seu navegador não suporta áudio.
   </audio>
-
-  <button id="botaoSom">🔈 Ativar Som</button>
 
   <script>
     const audio = document.getElementById('musicaFundo');
@@ -47,5 +78,6 @@
       }
     });
   </script>
+
 </body>
 </html>
