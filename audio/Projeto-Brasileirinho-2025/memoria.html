@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🧠 Jogo da Memória</title>
+  <style>
+    body {
+      font-family: Comic Sans MS, cursive;
+      background-color: #fff8e1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ff6f00;
+      margin-bottom: 20px;
+    }
+
+    .tabuleiro {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .carta {
+      background-color: #ffe082;
+      font-size: 30px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .carta.revelada {
+      background-color: #fff9c4;
+    }
+
+    .botao-voltar {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 10px;
+      background-color: #ffcc80;
+      text-decoration: none;
+      color: #000;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+
+    .botao-voltar:hover {
+      background-color: #ffe0b2;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Jogo da Memória</h1>
+
+  <div class="tabuleiro" id="tabuleiro"></div>
+
+  <a href="Jogos.html" class="botao-voltar">← Voltar aos Jogos</a>
+
+  <script>
+    const emojis = ['🦜', '🐒', '🐍', '🐸'];
+    let cartas = [...emojis, ...emojis]; // pares duplicados
+    cartas = cartas.sort(() => 0.5 - Math.random());
+
+    const tabuleiro = document.getElementById('tabuleiro');
+    let primeiraCarta = null;
+    let segundaCarta = null;
+    let travado = false;
+
+    cartas.forEach((emoji) => {
+      const carta = document.createElement('div');
+      carta.classList.add('carta');
+      carta.textContent = '❓';
+      carta.dataset.valor = emoji;
+
+      carta.addEventListener('click', () => {
+        if (travado || carta.classList.contains('revelada')) return;
+
+        carta.textContent = emoji;
+        carta.classList.add('revelada');
+
+        if (!primeiraCarta) {
+          primeiraCarta = carta;
+        } else {
+          segundaCarta = carta;
+          travado = true;
+
+          if (primeiraCarta.dataset.valor === segundaCarta.dataset.valor) {
+            primeiraCarta = null;
+            segundaCarta = null;
+            travado = false;
+          } else {
+            setTimeout(() => {
+              primeiraCarta.textContent = '❓';
+              segundaCarta.textContent = '❓';
+              primeiraCarta.classList.remove('revelada');
+              segundaCarta.classList.remove('revelada');
+              primeiraCarta = null;
+              segundaCarta = null;
+              travado = false;
+            }, 1000);
+          }
+        }
+      });
+
+      tabuleiro.appendChild(carta);
+    });
+  </script>
+
+</body>
+</html>
